@@ -5,19 +5,28 @@
     <meta charset='UTF-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>nonogram</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel='stylesheet' href='css/style.css'>
+    <link rel='stylesheet' href='css/slider.css'>
+    <title>Nonogram</title>
 </head>
 
 <body>
-    <table></table>
-    <br>
-    <div>
-        <p>size</p>
-        <input type='number' min='2' max='1024' value='5'>
-    </div>
-    <btn>Reset</btn>
-    <script src='nonogram.min.js'></script>
+    <game></game>
+    <p id='win_label'>Finished!</p>
+    <controls>
+        <stats>
+            <p id='mistakes_label'>Mistakes<span>0</span></p>
+            <p id='time_label'>Time<span>00:00:00</span></p>
+        </stats>
+        <settings>
+            <p id='chance_label'>Chance: 60%</p>
+            <input type='range' min='0' max='100' value='60' id='chance_slider'>
+            <p id='size_label'>Size: 10x10</p>
+            <input type='range' min='3' max='25' value='10' id='size_slider'>
+        </settings>
+    </controls>
+    <btn id='reset_btn'>New Game</btn>
+    <script src='js/script.js'></script>
 </body>
 
 </html>

@@ -1,0 +1,225 @@
+:root {
+	--col-text: #808080;
+	--col-text-light: #d3d3d3;
+	--col-primary: cadetblue;
+	--col-primary-light: hsl(182, 35%, 60%);
+	--col-empty-clicked: #fff;
+	--col-filled-clicked: #000;
+	--col-fail: hsl(0, 90%, 70%);
+	--shadow-1: 0px 1px 1px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.15);
+	--shadow-2: 0px 3px 3px rgba(0, 0, 0, 0.15), 0px 8px 8px rgba(0, 0, 0, 0.1);
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	user-select: none;
+}
+
+body {
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	color: var(--col-text);
+}
+
+game {
+	display: inline-block;
+	margin-top: 1em;
+}
+
+game.gameover .field {
+	cursor: default;
+}
+
+btn {
+	display: inline-block;
+	padding: 0.6em 1em;
+	background-color: var(--col-primary);
+	color: white;
+	box-shadow: var(--shadow-1);
+	border: none;
+	cursor: pointer;
+	transition: box-shadow 0.3s, background-color 0.3s;
+	margin-bottom: 2em;
+}
+
+btn:hover {
+	background-color: var(--col-primary-light);
+	box-shadow: var(--shadow-2);
+}
+
+.field {
+	height: 30px;
+	width: 30px;
+	transition: background-color 0.3s;
+	background-color: var(--col-text-light);
+}
+
+tr:not(:first-of-type) td:first-of-type {
+	white-space: nowrap;
+}
+
+game:not(.gameover) .field[clicked='false'][complete='false']:not(.fail):hover {
+	cursor: pointer;
+	background-color: var(--col-primary);
+}
+
+.field[legit='true'][complete='true'] {
+	opacity: 1;
+	animation-name: legitcomplete;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes legitcomplete {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.5;
+	}
+}
+
+.field[legit='false'][clicked='true'] {
+	background-color: var(--col-empty-clicked);
+}
+
+.field[legit='false'][complete='true'] {
+	animation-name: emptycomplete;
+	animation-duration: 0.5s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes emptycomplete {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+game.gameover .field[complete='false'][clicked='false'] {
+	animation-name: fallout;
+	animation-duration: 2s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fallout {
+	to {
+		transform: scale(0);
+	}
+}
+
+game.gameover .field[legit='true'] {
+	background-color: var(--col-primary);
+	animation-name: fadein;
+	animation-duration: 2s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fadein {
+	to {
+		opacity: 1;
+	}
+}
+
+.field.divider {
+	transition: border-width 0.1s, background-color 0.3s;
+	border: 0px solid white;
+}
+
+.field.divider.r {
+	border-right-width: 2px;
+}
+
+.field.divider.l {
+	border-left-width: 2px;
+}
+
+.field.divider.b {
+	border-bottom-width: 2px;
+}
+
+.field.divider.t {
+	border-top-width: 2px;
+}
+
+game.gameover .field.divider {
+	border-width: 0;
+}
+
+game.gameover tr:first-of-type td,
+game.gameover tr td:first-of-type {
+	opacity: 0;
+}
+
+.field[legit='true'][clicked='true'] {
+	background-color: var(--col-filled-clicked);
+}
+
+.field.fail {
+	background-color: var(--col-fail);
+}
+
+p {
+	margin: 1em 0 0 0;
+}
+
+controls {
+	width: 80%;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+settings,
+stats {
+	display: block;
+}
+
+stats {
+	margin-right: 5%;
+}
+
+settings {
+	margin-left: 5%;
+}
+
+#mistakes_label span.notzero {
+	color: var(--col-fail);
+}
+
+#time_label {
+	margin-bottom: 4em;
+}
+
+#time_label span,
+#mistakes_label span {
+	display: block;
+	margin: 0.2em 0;
+	font-size: 1.2em;
+	font-weight: 700;
+}
+
+#chance_label,
+#mistakes_label {
+	margin-top: 0;
+}
+
+#win_label {
+	font-size: 2em;
+	color: var(--col-primary);
+	visibility: hidden;
+	margin-bottom: 1em;
+}
+
+#win_label.active {
+	visibility: visible;
+}
+
+#reset_btn {
+	margin-top: 2em;
+}
